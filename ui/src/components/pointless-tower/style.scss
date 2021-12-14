@@ -1,0 +1,44 @@
+.pointless-tower {
+    color: yellow;
+    text-align: center;
+    margin: auto;
+
+    .counter {
+        font-size: 70px;
+        font-weight:bolder;
+        background-color: green;
+        border-radius: 50%;
+        border: 4px inset yellow;
+        margin-bottom: 20px;
+    }
+
+    .level {
+        height: 7px;
+        width: 200px;
+        margin: 1px;
+        border-radius: 50%;
+    }
+
+    .hidden {
+        animation-name: hidden;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes hidden {
+    0% {
+        transform: scaleX(1) translateY(0);
+        opacity: 100%;
+        blur: 0px;
+    }
+
+    90% {
+        transform: scaleX(0.9) translateY(-100px);
+    }
+    100% {
+        transform: scaleX(0.3) translateY(-120px);
+        opacity: 0%;
+        blur: 10px;
+    }
+}

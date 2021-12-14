@@ -1,0 +1,51 @@
+.pointless-board {
+    display: flex;
+    background: rgb(9,9,121);
+    background: radial-gradient(circle, rgba(9,9,121,1) 7%, rgba(2,0,36,1) 77%);
+    height: 100vh;
+
+    .players {
+        padding: 50px;
+        border-right: 2px solid white;
+        color: white;
+        text-align: center;
+
+        h1 {
+            font-size: 45px;
+        }
+        
+        .teams-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .team-container {
+            margin: 40px 0;
+            
+
+            .score-container {
+                display: flex;
+                justify-content: center;
+            
+                .score-icon {
+                    display: flex;
+                    border: 2px solid white;
+                    border-radius: 50%;
+                    background-color: white;
+                    height: 20px;
+                    width: 20px;
+                    display: inline-block;
+                    margin: 5px;
+                }
+            }
+        }
+    }
+
+    .tower-container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        flex: 4;
+        padding: 20px
+    }
+}
