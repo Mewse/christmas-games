@@ -1,5 +1,7 @@
 import React from "react"
 
+import PointlessTower from "../../components/pointless-tower";
+
 class Pointless extends(React.Component) {
     state = {
         teams: [],
@@ -37,6 +39,7 @@ class Pointless extends(React.Component) {
                         </div>
                     ))}
                 </div>
+                <PointlessTower level={100} target={40} height={100}/>
             </div>
         )
     }
