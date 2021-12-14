@@ -5,18 +5,26 @@
 
     .counter {
         font-size: 70px;
-        font-weight:bolder;
-        background-color: green;
+        font-weight:900;
         border-radius: 50%;
         border: 4px inset yellow;
         margin-bottom: 20px;
     }
 
     .level {
-        height: 7px;
-        width: 200px;
-        margin: 1px;
-        border-radius: 50%;
+        height: 4px;
+        width: 300px;
+        margin: 3px;
+        border-radius: 10%;
+        background: linear-gradient(90deg, rgba(150,150,150,1) 0%, rgba(255,255,255,1) 23%, rgba(255,255,255,1) 39%, rgba(150,150,150,1) 51%, rgba(255,255,255,1) 61%, rgba(255,255,255,1) 79%, rgba(209,209,209,1) 100%);
+    }
+
+    .top {
+        background: hotpink;
+    }
+
+    .target {
+        background: red;
     }
 
     .hidden {
