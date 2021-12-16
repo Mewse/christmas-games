@@ -1,0 +1,43 @@
+.tenable-tower {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .answer-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &.answer-clip {
+            position: relative;
+            width: 990px;
+            height: 765px;
+            clip-path: polygon(50% 0%, 50% 0%, 100% 100%, 0% 100%);
+        }
+    
+
+        .answer {
+            text-align: center;
+            height: 40px;
+            background-color: green;
+            border-top: 1px solid white;
+            border-bottom: 1px solid white;
+            color: white;
+            font-size: 30px;
+            line-height: 40px;
+            max-width: 750px;
+
+            &:last-child {
+                border-radius: 0 0 50px 50px;
+            }
+            &:first-child {
+                max-width: 240px;
+                border-radius: 50px 50px 0 0;
+            }
+        }
+    }
+    
+}

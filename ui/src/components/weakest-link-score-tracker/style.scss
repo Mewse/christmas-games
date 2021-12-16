@@ -9,7 +9,7 @@
         display: flex;
         flex-direction: column;
         flex: 4;
-        margin-bottom: 40px;
+        margin-top: 10px;
         max-width: 500px;
         min-width: 500px;
     }
@@ -20,6 +20,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: end;
+        min-height: 94px;
     }
 
     .score-option {
@@ -59,6 +60,7 @@
         align-items: center;
         max-width: 500px;
         min-width: 500px;
+        margin-top: 40px;
 
         h1 {
             color: white;

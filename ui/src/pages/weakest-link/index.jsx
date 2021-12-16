@@ -17,7 +17,7 @@ class WeakestLink extends (React.Component){
 
     componentDidMount() {
         window.game = this;
-        document.addEventListener("keypress", (e) => {
+        this.listener = document.addEventListener("keypress", (e) => {
             if (e.code === "Period") {
                 this.inc();
             }
@@ -42,13 +42,17 @@ class WeakestLink extends (React.Component){
             if (e.code === "Equal") {
                 this.incTimer();
             }
-            if (e.code === "Backspace") {
+            if (e.code === "KeyF") {
                 this.wrong();
             }
             if (e.code === "KeyP") {
                 this.endRound();
             }
         })
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keypress", this.listener);
     }
 
     render = () => {

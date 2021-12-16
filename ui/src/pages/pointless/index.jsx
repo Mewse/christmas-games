@@ -10,24 +10,24 @@ class Pointless extends(React.Component) {
         teams: [
             {
                 name: "Sam, Katie & Mary",
-                score: 42,
+                score: 0,
                 roundScore: 0
             },
             {
                 name: "Mike, Jill & Liz",
-                score: 12,
-                roundScore: 1
+                score: 0,
+                roundScore: 0
             },
             {
                 name: "Vija, Nick and Adam",
-                score: 121,
-                roundScore: 2
+                score: 0,
+                roundScore: 0
             }
         ],
         tower: {
             height: TOWER_HEIGHT,
             level: TOWER_HEIGHT,
-            target: 32,
+            target: null,
             failed: false
         },
         showTower: true,
@@ -63,6 +63,19 @@ class Pointless extends(React.Component) {
         this.targetReachedAudio.volume = 0.1;
         this.answerEnd.volume = 0.5;
         this.pointlessAnswer.volume = 0.1;
+
+        this.listener = document.addEventListener("keypress", (e) => {
+            if (e.code === "KeyR") {
+                this.reset();
+            }
+            if (e.code === "KeyF") {
+                this.fail();
+            }
+        })
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keypress", this.listener);
     }
 
     render = () => {
@@ -72,8 +85,8 @@ class Pointless extends(React.Component) {
                 <div className="players">
                     <h1>Teams</h1>
                     <div className="teams-container">
-                        {this.state.teams.map(team => (
-                            <div className="team-container">
+                        {this.state.teams.map((team, id) => (
+                            <div key={id} className="team-container">
                                 <h2>{team.name}</h2>
                                 <h3>Score: {team.score}</h3>
                                 <div className="score-container">

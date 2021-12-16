@@ -9,7 +9,7 @@ const WeakestLinkScoreTracker = (props) => {
                 {scoreOptions.map((option, id) => {
                     if (option === selectedOption) optionId = id;
                     return (
-                        <div className="option-container">
+                        <div key={id} className="option-container">
                             <div key={id} 
                                 style={{zIndex: scoreOptions.length - id, marginBottom: optionId !== null && id > optionId ? -50*(scoreOptions.length - id) : 0 }}
                                 className={`score-option ${selectedOption === option ? "selected": ""} ${id === 0 ? "highlight": ""} ${optionId !== null && id > optionId ? "passed" : ""}`}>
