@@ -13,7 +13,7 @@ const WeakestLinkScoreTracker = (props) => {
                             <div key={id} 
                                 style={{zIndex: scoreOptions.length - id, marginBottom: optionId !== null && id > optionId ? -50*(scoreOptions.length - id) : 0 }}
                                 className={`score-option ${selectedOption === option ? "selected": ""} ${id === 0 ? "highlight": ""} ${optionId !== null && id > optionId ? "passed" : ""}`}>
-                                {option}
+                                £{option}
                             </div>
                         </div>
                     );
@@ -21,7 +21,7 @@ const WeakestLinkScoreTracker = (props) => {
             </div>
             <div className="bank-container">
                 <div className="bank">
-                    {total}
+                    £{total}
                 </div>
                 <h1>BANK</h1>
             </div>

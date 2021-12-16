@@ -3,12 +3,15 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     .options {
         display: flex;
         flex-direction: column;
         flex: 4;
         margin-bottom: 40px;
+        max-width: 500px;
+        min-width: 500px;
     }
 
     .option-container {
@@ -17,7 +20,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: end;
-        margin-bottom: 20px;
     }
 
     .score-option {
@@ -55,6 +57,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        max-width: 500px;
+        min-width: 500px;
 
         h1 {
             color: white;
