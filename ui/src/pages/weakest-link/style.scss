@@ -1,0 +1,13 @@
+.weakest-link-board {
+    background: rgb(13,0,129);
+    background: radial-gradient(circle, rgba(13,0,129,1) 0%, rgba(0,0,0,1) 68%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+    img {
+        width: 50vw;
+        height: 720px;
+        object-fit: cover;
+    }
+}

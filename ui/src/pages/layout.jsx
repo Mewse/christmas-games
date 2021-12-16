@@ -16,17 +16,14 @@ import Home from './home';
 function Layout() {
   return (
     <div>
-        <body>
-            
-            <Router>
-                <Routes>
-                    <Route path="/tenable" element={<Tenable />} />
-                    <Route path="/weakest-link" element={<WeakestLink />} />
-                    <Route path="/pointless" element={<Pointless />} />
-                    <Route path="/" element={<Home />} />
-                </Routes>
-            </Router>
-        </body>
+        <Router>
+            <Routes>
+                <Route path="/tenable" element={<Tenable />} />
+                <Route path="/weakest-link" element={<WeakestLink />} />
+                <Route path="/pointless" element={<Pointless />} />
+                <Route path="/" element={<Home />} />
+            </Routes>
+        </Router>
     </div>
   );
 }
