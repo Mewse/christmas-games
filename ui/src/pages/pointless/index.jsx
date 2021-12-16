@@ -1,7 +1,9 @@
 import React from "react"
-
+import confetti from "canvas-confetti";
 import PointlessTower from "../../components/pointless-tower";
 import "./style.scss";
+
+const TOWER_HEIGHT = 100;
 
 class Pointless extends(React.Component) {
     state = {
@@ -23,9 +25,10 @@ class Pointless extends(React.Component) {
             }
         ],
         tower: {
-            height: 100,
-            level: 100,
-            target: 32
+            height: TOWER_HEIGHT,
+            level: TOWER_HEIGHT,
+            target: 32,
+            failed: false
         },
         showTower: true,
         selectedRound: null,
@@ -54,10 +57,12 @@ class Pointless extends(React.Component) {
     targetReachedAudio = new Audio("/sfx/pointless-target-reached.mp3");
     correctAnswer = new Audio("/sfx/pointless-correct-answer.mp3");
     answerEnd = new Audio("/sfx/pointless-answer-end.mp3");
+    pointlessAnswer = new Audio("/sfx/pointless-pointless-answer.mp3");
     componentDidMount() {
         window.game = this;
         this.targetReachedAudio.volume = 0.1;
         this.answerEnd.volume = 0.5;
+        this.pointlessAnswer.volume = 0.1;
     }
 
     render = () => {
@@ -82,7 +87,13 @@ class Pointless extends(React.Component) {
                 </div>
                 {this.state.showTower ? (
                     <div className="tower-container">
-                        <PointlessTower level={this.state.tower.level} target={this.state.tower.target} height={this.state.tower.height}/>
+                        <PointlessTower 
+                            level={this.state.tower.level} 
+                            target={this.state.tower.target} 
+                            height={this.state.tower.height}
+                            overridePrompt={this.state.tower.override}
+                            failed={this.state.tower.failed}
+                        />
                     </div>        
                 ) : (
                     <div className="round-container">
@@ -102,12 +113,53 @@ class Pointless extends(React.Component) {
             this.decrementTower();
             await this.sleep(50);
         }
-        this.answerEnd.play();
-        this.correctAnswer.pause();
-        this.correctAnswer.currentTime = 0;
+        if (target === 0) {
+            this.pointlessAnswer.play()
+            confetti({
+                origin: {x: 0, y: 1},
+                angle: 45,
+                velocity: 100,
+                particleCount: 150
+            });
+            await this.sleep(100);
+            confetti({
+                origin: {x: 1, y: 0.5},
+                angle: 180,
+                velocity: 100,
+                particleCount: 150
+            });
+            await this.sleep(100);
+            confetti({
+                origin: {x: 1, y: 1},
+                angle: 125,
+                velocity: 100,
+                particleCount: 150
+            });
+            await this.sleep(100);
+            confetti({
+                origin: {x: 0.25, y: 1},
+                angle: 65,
+                velocity: 100,
+                particleCount: 150
+            });
+        } else {
+            this.answerEnd.play();
+            this.correctAnswer.pause();
+            this.correctAnswer.currentTime = 0;
+        }
+        
     }
 
     fail() {
+        this.setState({
+            tower: {
+                override: "X",
+                level: TOWER_HEIGHT,
+                height: this.state.tower.height,
+                target: null,
+                failed: true
+            }
+        })
         this.incorrectAudio.play();
     }
 
@@ -128,9 +180,20 @@ class Pointless extends(React.Component) {
     reset() {
         this.setState({
             tower: {
-                level: 100,
+                level: TOWER_HEIGHT,
                 target: null,
                 height: this.state.tower.height
+            }
+        });
+    }
+
+    setTarget(target) {
+        this.setState({
+            tower: {
+                level: TOWER_HEIGHT,
+                target: target,
+                height: this.state.tower.height,
+                failed: false
             }
         });
     }

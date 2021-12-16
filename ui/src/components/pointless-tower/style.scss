@@ -4,11 +4,17 @@
     margin: auto;
 
     .counter {
-        font-size: 70px;
-        font-weight:900;
         border-radius: 50%;
         border: 4px inset yellow;
         margin-bottom: 20px;
+        p {
+            margin: 0;
+            font-size: 70px;
+            font-weight:900;
+        }
+        &.failed {
+            border: 4px inset red;
+        }
     }
 
     .level {
@@ -17,6 +23,9 @@
         margin: 3px;
         border-radius: 10%;
         background: linear-gradient(90deg, rgba(150,150,150,1) 0%, rgba(255,255,255,1) 23%, rgba(255,255,255,1) 39%, rgba(150,150,150,1) 51%, rgba(255,255,255,1) 61%, rgba(255,255,255,1) 79%, rgba(209,209,209,1) 100%);
+        &.failed {
+            background: linear-gradient(90deg, rgb(151, 44, 44) 0%, rgb(255, 92, 92) 23%, rgba(255, 92, 92,1) 39%, rgba(151, 44, 44,1) 51%, rgba(255, 92, 92,1) 61%, rgba(255, 92, 92,1) 79%, rgb(202, 75, 75) 100%);
+        }
     }
 
     .top {
@@ -50,3 +59,27 @@
         blur: 10px;
     }
 }
+
+@keyframes spinner {
+    0% { transform: rotateY(0deg) scale(1) }
+    // 5% { transform: rotateY(180deg); }
+    33% { transform: rotateY(360deg) scale(1.7); }
+    // 15% { transform: rotateY(540deg); }
+    // 20% { transform: rotateY(720deg); }
+    // 25% { transform: rotateY(900deg); }
+    66% { transform: rotateY(720deg); }
+    // 35% { transform: rotateY(1260deg); }
+    100% { transform: rotateY(1080deg) scale(1); }
+    // 100% {
+    //   transform: rotateY(-360deg);
+    // }
+}
+
+.spinner {
+    color: red;
+    animation-name: spinner;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+    transform-style: preserve-3d;
+  }
