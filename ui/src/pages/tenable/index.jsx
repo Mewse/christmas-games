@@ -6,7 +6,7 @@ import TenableTower from "../../components/tenable-tower";
 class Tenable extends React.Component {
     state = {
         answers: ["1","2","3","4","5","6","7","8","9","10"],
-        answered: ["2", "7", "8"],
+        answered: ["2", "7", "8", "1", "3", "4"],
         fail: false,
         highlight: null
     }
@@ -23,17 +23,25 @@ class Tenable extends React.Component {
         new Audio("/sfx/tenable-step-9.mp3"),
     ]
     correctSound = new Audio("/sfx/tenable-correct-answer.mp3");
-    failSound = new Audio("/src/tenable-fail.mp3");
+    failSound = new Audio("/sfx/tenable-incorrect-answer.mp3");
+    roundCompleteSound = new Audio("/sfx/tenable-round-complete.mp3");
 
     componentDidMount() {
         window.game = this;
+        this.roundCompleteSound.volume = 0.5;
         this.listener = document.addEventListener("keypress", (e) => {
             if (e.code === "KeyF") {
                 this.showIncorrect();
             }
             if (e.keyCode >= 48 && e.keyCode <= 57) {
-                const index = Number(e.key);
+                let index = Number(e.key) - 1;
+                if (index === -1) {
+                    index = 9
+                }
                 this.showCorrect(index);
+            }
+            if (e.code === "KeyR") {
+                this.reset();
             }
         })
     }
@@ -44,11 +52,12 @@ class Tenable extends React.Component {
 
     render() {
         return (
-            <div className="tenable-board">
+            <div className={`tenable-board ${this.state.fail ? "fail" : ""} ${this.state.complete ? "complete" : ""}`}>
                 <TenableTower 
                     answers={this.state.answers}
                     answered={this.state.answered}
                     fail={this.state.fail}
+                    complete={this.state.complete}
                     highlight={this.state.highlight}
                 />
             </div>
@@ -61,30 +70,66 @@ class Tenable extends React.Component {
         });
     }
 
+    getLowestUnanswered() {
+        let lowest = 0;
+        this.state.answers.every((answer, id) => {
+            if (!this.state.answered.includes(answer)) {
+                lowest = id;
+                return false;
+            }
+            return true;
+        })
+        return lowest;
+    }
+
     async showIncorrect() {
-        await this.stepToIndex(0);
+        const lowestUnanswered = this.getLowestUnanswered()
+        await this.stepToIndex(lowestUnanswered, lowestUnanswered);
         this.failSound.play();
         this.setState({
-            highlight: null,
             fail: true
         })
+        await this.sleep(2000);
+        this.setState({
+            fail: false, 
+            highlight: null
+        });
     }
 
     async showCorrect(index) {
         await this.stepToIndex(index+1);
         this.correctSound.play();
-        this.setState({
-            answered: this.state.answered.concat(this.state.answers[index]),
-            highlight: null,
-        })
+        if (this.state.answered.length + 1 === this.state.answers.length) {
+            this.roundCompleteSound.play();
+            this.setState({
+                answered: this.state.answered.concat(this.state.answers[index]),
+                highlight: null,
+                complete: true
+            })
+        } else {
+            this.setState({
+                answered: this.state.answered.concat(this.state.answers[index]),
+                highlight: null,
+            })
+        }
     }
 
-    async stepToIndex(index) {
+    async stepToIndex(index, failIndex=null) {
         for (let i = this.state.answers.length-1; i >= index; i--) {
             this.setHighlight(i);
-            this.stepSounds[this.state.answers.length - (i+1)].play();
-            await this.sleep(800);
+            if (i > 0 && i !== failIndex) {
+                this.stepSounds[this.state.answers.length - (i+1)].play();
+                await this.sleep(800);
+            }
         }
+    }
+
+    reset() {
+        this.setState({
+            highlight: null,
+            fail: false,
+            complete: false
+        });
     }
 
     sleep(ms) {

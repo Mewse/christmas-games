@@ -3,6 +3,27 @@
     height: 100vh;
     justify-content: center;
     justify-items: center;
-    background: rgb(2,8,3);
-    background: radial-gradient(circle, rgba(2,8,3,1) 78%, rgba(33,189,38,1) 100%);
+    background: url("./tenable-background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: black;
+    
+    &.fail {
+        background: url("./tenable-background-fail.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: black;
+    }
+
+    &.complete {
+        background: url("./tenable-background-complete.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: black;
+    }
 }
+
+body::after{
+    position:absolute; width:0; height:0; overflow:hidden; z-index:-1; // hide images
+    content:url("./tenable-background.png") url("./tenable-background-fail.png") url("./tenable-background-complete.png");
+ }
