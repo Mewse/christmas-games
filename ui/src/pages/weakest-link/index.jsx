@@ -17,42 +17,45 @@ class WeakestLink extends (React.Component){
 
     componentDidMount() {
         window.game = this;
-        this.listener = document.addEventListener("keypress", (e) => {
-            if (e.code === "Period") {
-                this.inc();
-            }
-            if (e.code === "Comma") {
-                this.dec();
-            }
-            if (e.code === "Enter") {
-                this.bank();
-            }
-            if (e.code === "KeyR") {
-                this.reset();
-            }
-            if (e.code === "KeyI") {
-                this.intro();
-            }
-            if (e.code === "KeyS") {
-                this.startTimer();
-            }
-            if (e.code === "Minus") {
-                this.decTimer();
-            }
-            if (e.code === "Equal") {
-                this.incTimer();
-            }
-            if (e.code === "KeyF") {
-                this.wrong();
-            }
-            if (e.code === "KeyP") {
-                this.endRound();
-            }
-        })
+        this.handleKeypress = this.handleKeypress.bind(this);
+        this.listener = document.addEventListener("keypress", this.handleKeypress)
     }
 
     componentWillUnmount() {
         document.removeEventListener("keypress", this.listener);
+    }
+
+    handleKeypress(e) {
+        if (e.code === "Period") {
+            this.inc();
+        }
+        if (e.code === "Comma") {
+            this.dec();
+        }
+        if (e.code === "Enter") {
+            this.bank();
+        }
+        if (e.code === "KeyR") {
+            this.reset();
+        }
+        if (e.code === "KeyI") {
+            this.intro();
+        }
+        if (e.code === "KeyS") {
+            this.startTimer();
+        }
+        if (e.code === "Minus") {
+            this.decTimer();
+        }
+        if (e.code === "Equal") {
+            this.incTimer();
+        }
+        if (e.code === "KeyF") {
+            this.wrong();
+        }
+        if (e.code === "KeyP") {
+            this.endRound();
+        }
     }
 
     render = () => {
@@ -68,7 +71,7 @@ class WeakestLink extends (React.Component){
                         <div className="timer">{this.renderTime()}</div>
                     </div>
                     <div className="image-container">
-                        <img src="/images/anne.png" />
+                        <img alt="dave robinson" src="/images/anne.png" />
                     </div>
                     <div className="pot-container">
                         <div className="pot">Total: £{this.state.pot}</div>

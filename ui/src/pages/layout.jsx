@@ -1,11 +1,9 @@
-import logo from '../logo.svg';
 import './layout.less';
 
 import {
     BrowserRouter as Router,
     Routes,
-    Route,
-    Link
+    Route
   } from "react-router-dom";
 
 import WeakestLink from './weakest-link';

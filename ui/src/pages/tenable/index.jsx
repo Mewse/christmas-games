@@ -2,11 +2,13 @@ import React from "react";
 
 import "./style.scss";
 import TenableTower from "../../components/tenable-tower";
+import rounds from "./questions";
 
 class Tenable extends React.Component {
     state = {
-        answers: ["1","2","3","4","5","6","7","8","9","10"],
-        answered: ["2", "7", "8", "1", "3", "4"],
+        answers: rounds[0].answers,
+        answered: ["Partridge in a pear tree"],
+        prompt: rounds[0].prompt,
         fail: false,
         highlight: null
     }
@@ -28,26 +30,29 @@ class Tenable extends React.Component {
 
     componentDidMount() {
         window.game = this;
+        this.handleKeypress = this.handleKeypress.bind(this);
         this.roundCompleteSound.volume = 0.5;
-        this.listener = document.addEventListener("keypress", (e) => {
-            if (e.code === "KeyF") {
-                this.showIncorrect();
-            }
-            if (e.keyCode >= 48 && e.keyCode <= 57) {
-                let index = Number(e.key) - 1;
-                if (index === -1) {
-                    index = 9
-                }
-                this.showCorrect(index);
-            }
-            if (e.code === "KeyR") {
-                this.reset();
-            }
-        })
+        document.addEventListener("keypress", this.handleKeypress)
     }
 
     componentWillUnmount() {
-        document.removeEventListener("keypress", this.listener);
+        document.removeEventListener("keypress", this.handleKeypress);
+    }
+
+    handleKeypress(e) {
+        if (e.code === "KeyF") {
+            this.showIncorrect();
+        }
+        if (e.keyCode >= 48 && e.keyCode <= 57) {
+            let index = Number(e.key) - 1;
+            if (index === -1) {
+                index = 9
+            }
+            this.showCorrect(index);
+        }
+        if (e.code === "KeyR") {
+            this.reset();
+        }
     }
 
     render() {
@@ -60,6 +65,7 @@ class Tenable extends React.Component {
                     complete={this.state.complete}
                     highlight={this.state.highlight}
                 />
+                <div className="prompt">{this.state.prompt}</div>
             </div>
         );
     }
@@ -73,7 +79,7 @@ class Tenable extends React.Component {
     getLowestUnanswered() {
         let lowest = 0;
         this.state.answers.every((answer, id) => {
-            if (!this.state.answered.includes(answer)) {
+            if (!this.state.answered.includes(answer.answer)) {
                 lowest = id;
                 return false;
             }
@@ -102,13 +108,13 @@ class Tenable extends React.Component {
         if (this.state.answered.length + 1 === this.state.answers.length) {
             this.roundCompleteSound.play();
             this.setState({
-                answered: this.state.answered.concat(this.state.answers[index]),
+                answered: this.state.answered.concat(this.state.answers[index].answer),
                 highlight: null,
                 complete: true
             })
         } else {
             this.setState({
-                answered: this.state.answered.concat(this.state.answers[index]),
+                answered: this.state.answered.concat(this.state.answers[index].answer),
                 highlight: null,
             })
         }
@@ -121,6 +127,21 @@ class Tenable extends React.Component {
                 this.stepSounds[this.state.answers.length - (i+1)].play();
                 await this.sleep(800);
             }
+        }
+    }
+
+    setRound(roundId) {
+        if (rounds.length > roundId) {
+            this.setState({ 
+                answers: rounds[roundId].answers,
+                prompt: rounds[roundId].prompt,
+                answered: [],
+                highlight: null,
+                fail: false,
+                complete: false
+            });
+        } else {
+            console.log("That round id doesnt exist");
         }
     }
 

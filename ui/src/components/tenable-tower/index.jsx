@@ -6,10 +6,10 @@ const TenableTower = (props) => {
         <div className={`tenable-tower`}>
             <div className="answer-container answer-clip">
                 {answers.map((answer, id) => (
-                    <div 
-                        style={{width: 300+ 60*(id+1)}}
-                        className={`answer ${answered.includes(answer) ? "answered": ""} ${highlight === id ? "highlight": ""}  ${fail ? "fail": ""}`}>
-                            {answer}
+                    <div key={id} 
+                        style={{width: 300+ 60*(id+1), fontSize: answered.includes(answer.answer) ? answer.fontSize : "1.5vw"}}
+                        className={`answer ${answered.includes(answer.answer) ? "answered": ""} ${highlight === id ? "highlight": ""}  ${fail ? "fail": ""}`}>
+                            {answered.includes(answer.answer) ? answer.answer : String(id+1)}
                     </div>
                 ))}
             </div>

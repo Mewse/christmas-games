@@ -1,7 +1,9 @@
 import React from "react"
 import confetti from "canvas-confetti";
 import PointlessTower from "../../components/pointless-tower";
+import PointlessAnswerGrid from "../../components/pointless-answer-grid";
 import "./style.scss";
+import {rounds} from "./questions";
 
 const TOWER_HEIGHT = 100;
 
@@ -30,28 +32,12 @@ class Pointless extends(React.Component) {
             target: null,
             failed: false
         },
-        showTower: true,
+        showTower: false,
         selectedRound: null,
-        rounds: {
-            "1": {
-                "type": "text",
-                "answers": [
-                    {
-                        "prompt": "",
-                        "count": 2
-                    }
-                ]
-            },
-            "2": {
-                "type": "picture",
-                "answers": [
-                    {
-                        "url": "",
-                        "count": 2
-                    }
-                ]
-            }
-        }
+        answers: rounds[1].answers,
+        answered: [1,2,3,4],
+        prompt: rounds[1].prompt,
+        type: rounds[1].type
     }
     incorrectAudio = new Audio("/sfx/pointless-incorrect.mp3");
     targetReachedAudio = new Audio("/sfx/pointless-target-reached.mp3");
@@ -71,6 +57,16 @@ class Pointless extends(React.Component) {
             if (e.code === "KeyF") {
                 this.fail();
             }
+            if (e.code === "KeyT") {
+                this.toggleTower();
+            }
+            if (e.keyCode >= 48 && e.keyCode <= 57) {
+                let index = Number(e.key) - 1;
+                if (index === -1) {
+                    index = 9
+                }
+                this.setRound(index);
+            }
         })
     }
 
@@ -78,7 +74,7 @@ class Pointless extends(React.Component) {
         document.removeEventListener("keypress", this.listener);
     }
 
-    render = () => {
+    render() {
         return (
             <div className="pointless-board">
                 
@@ -91,7 +87,7 @@ class Pointless extends(React.Component) {
                                 <h3>Score: {team.score}</h3>
                                 <div className="score-container">
                                     {Array(team.roundScore).fill().map((_, score) => (
-                                        <div className="score-icon">&nbsp;</div>
+                                        <div key={score} className="score-icon">&nbsp;</div>
                                     ))}
                                 </div>
                             </div>
@@ -110,7 +106,12 @@ class Pointless extends(React.Component) {
                     </div>        
                 ) : (
                     <div className="round-container">
-
+                        <PointlessAnswerGrid 
+                            type={this.state.type}
+                            answers={this.state.answers} 
+                            answered={this.state.answered} 
+                            prompt={this.state.prompt}
+                        />
                     </div>
                 )}
             </div>
@@ -180,6 +181,12 @@ class Pointless extends(React.Component) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    toggleTower() {
+        this.setState({
+            showTower: !this.state.showTower
+        });
+    }
+
     decrementTower(){
         this.setState((prevState) => ({
             tower: {
@@ -215,6 +222,53 @@ class Pointless extends(React.Component) {
         this.setState({
             teams: this.state.teams.append({name: name, score: 0, roundScore: 0})
         })
+    }
+
+    setAnswered(answerId) {
+        this.setState({
+            answered: this.state.answered.concat(answerId)
+        });
+    }
+
+    addScore(playerId, score) {
+        if (playerId <= this.state.teams.length) {
+            let teams = [...this.state.teams];
+            teams[playerId].score = teams[playerId].score + score;
+            this.setState({
+                teams: teams
+            });
+        }
+    }
+
+    addRoundScore(playerId) {
+        if (playerId <= this.state.teams.length) {
+            let teams = [...this.state.teams];
+            teams[playerId].roundScore = teams[playerId].roundScore + 1;
+            this.setState({
+                teams: teams
+            });
+        }
+    }
+
+    subRoundScore(playerId) {
+        if (playerId <= this.state.teams.length) {
+            let teams = [...this.state.teams];
+            teams[playerId].roundScore = teams[playerId].roundScore - 1;
+            this.setState({
+                teams: teams
+            });
+        }
+    }
+ 
+    setRound(roundId) {
+        if (roundId < rounds.length) {
+            this.setState({
+                answers: rounds[roundId].answers,
+                prompt: rounds[roundId].prompt,
+                type: rounds[roundId].type,
+                answered: [],
+            });
+        }
     }
 }
 
