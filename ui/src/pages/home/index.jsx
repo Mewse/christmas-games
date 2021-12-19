@@ -5,13 +5,13 @@ const Home = (props) => {
         <div>
             <nav>
                 <li>
-                <Link to="/tenable">About</Link>
+                <Link to="/tenable">Tenable</Link>
                 </li>
                 <li>
-                <Link to="/pointless">Users</Link>
+                <Link to="/pointless">Pointless</Link>
                 </li>
                 <li>
-                <Link to="/weakest-link">Users</Link>
+                <Link to="/weakest-link">Weakest Link</Link>
                 </li>
             </nav>
         </div>

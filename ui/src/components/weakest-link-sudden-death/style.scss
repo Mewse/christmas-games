@@ -1,0 +1,57 @@
+.head-to-head {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+
+    .answer-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .player-name {
+        flex: 1;
+        align-content: flex-end;
+        background-color: rgb(46, 46, 46);
+        border-radius: 50%;
+        border: 4px inset white;
+        max-width: 200px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        color: white;
+        font-size: 25px;
+        margin: 5px 20px 5px 5px;
+    }
+
+    .answer {
+        background-color: rgb(16, 16, 112);
+        border-radius: 50%;
+        border: 4px inset white;
+        width: 100px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        color: grey;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 5px;
+
+        &.played {
+            color: white;
+        }
+
+        &.correct {
+            background-color: green;
+        }
+
+        &.wrong {
+            background-color: red;
+        }
+
+        &.highlight {
+            border-color: yellow;
+        }
+    }
+}

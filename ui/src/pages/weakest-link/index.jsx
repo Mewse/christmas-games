@@ -1,5 +1,6 @@
 import React from "react";
 import WeakestLinkScoreTracker from "../../components/weakest-link-score-tracker";
+import WeakestLinkSuddenDeath from "../../components/weakest-link-sudden-death";
 
 import "./style.scss";
 
@@ -9,7 +10,14 @@ class WeakestLink extends (React.Component){
         selectedOption: 20,
         total: 0,
         pot: 0,
-        timer: 180
+        timer: 180,
+        showHeadToHead: false,
+        p1Name: "",
+        p2Name: "",
+        p1Answers: [null, null, null, null, null],
+        p2Answers: [null, null, null, null, null],
+        player1Turn: true,
+        headToHeadQuestionId: 0
     }
     introAudio = new Audio("/sfx/weakest-link-pre-round.mp3");
     roundStartAudio = new Audio("/sfx/weakest-link-round-start.mp3");
@@ -56,19 +64,39 @@ class WeakestLink extends (React.Component){
         if (e.code === "KeyP") {
             this.endRound();
         }
+        if (e.code === "KeyT") {
+            this.toggleHeadToHead();
+        }
+        if (e.code === "KeyY") {
+            this.headToHeadAnswer(true);
+        }
+        if (e.code === "KeyN") {
+            this.headToHeadAnswer(false);
+        }
     }
 
     render = () => {
         return (
             <div className="weakest-link-board">
-                <WeakestLinkScoreTracker 
-                    scoreOptions={this.state.scoreOptions}
-                    selectedOption={this.state.selectedOption}
-                    total={this.state.total}
-                />
+                {this.state.showHeadToHead ? (
+                    <WeakestLinkSuddenDeath 
+                        p1Answers={this.state.p1Answers} 
+                        p2Answers={this.state.p2Answers} 
+                        p1Name={this.state.p1Name}
+                        p2Name={this.state.p2Name}
+                        player1Turn={this.state.player1Turn}
+                        questionId={this.state.headToHeadQuestionId}
+                    />
+                ) : (
+                    <WeakestLinkScoreTracker 
+                        scoreOptions={this.state.scoreOptions}
+                        selectedOption={this.state.selectedOption}
+                        total={this.state.total}
+                    />
+                )}
                 <div className="sidebar">
                     <div className="timer-container">
-                        <div className="timer">{this.renderTime()}</div>
+                        {this.state.showHeadToHead ? "": (<div className="timer">{this.renderTime()}</div>)}
                     </div>
                     <div className="image-container">
                         <img alt="dave robinson" src="/images/anne.png" />
@@ -115,6 +143,42 @@ class WeakestLink extends (React.Component){
             }
         } 
         
+    }
+
+    headToHeadAnswer(isCorrect) {
+        if (this.state.player1Turn) {
+            let answers = [...this.state.p1Answers];
+            answers[this.state.headToHeadQuestionId] = isCorrect
+            this.setState({
+                p1Answers: answers,
+                player1Turn: false
+            });
+        } else {
+            let answers = [...this.state.p2Answers];
+            answers[this.state.headToHeadQuestionId] = isCorrect
+            this.setState({
+                p2Answers: answers,
+                player1Turn: true,
+                headToHeadQuestionId: this.state.headToHeadQuestionId + 1
+            });
+        }
+    }
+    
+
+    getNextHeadToHead() {
+        const pos1 = this.state.p1Answers.find(null)
+        const pos2 = this.state.p2Answers.find(null)
+        if (pos1 <= pos2) {
+            this.setState({
+                player1Turn: true,
+                headToHeadQuestionId: pos1
+            });
+        } else {
+            this.setState({
+                player1Turn: false,
+                headToHeadQuestionId: pos2
+            });
+        }
     }
 
     completeRound() {
@@ -170,7 +234,11 @@ class WeakestLink extends (React.Component){
         this.setState({
             selectedOption: this.state.scoreOptions[this.state.scoreOptions.length-1],
             total: 0,
-            timer: 180
+            timer: 180,
+            p1Answers: [null, null, null, null, null],
+            p2Answers: [null, null, null, null, null],
+            headToHeadQuestionId: 0,
+            player1Turn: true,
         });
     }
 
@@ -183,6 +251,24 @@ class WeakestLink extends (React.Component){
                 } else {
                     return {timer: 0}
                 }
+            });
+        }
+    }
+
+    toggleHeadToHead() {
+        this.setState({
+            showHeadToHead: !this.state.showHeadToHead
+        });
+    }
+
+    setPlayerName(playerId, name) {
+        if (playerId === 0) {
+            this.setState({
+                p1Name: name
+            });
+        } else {
+            this.setState({
+                p2Name: name
             });
         }
     }
