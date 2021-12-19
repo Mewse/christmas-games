@@ -10,7 +10,8 @@ class Tenable extends React.Component {
         answered: ["Partridge in a pear tree"],
         prompt: rounds[0].prompt,
         fail: false,
-        highlight: null
+        highlight: null,
+        roundId: 0,
     }
     
     stepSounds = [
@@ -52,6 +53,12 @@ class Tenable extends React.Component {
         }
         if (e.code === "KeyR") {
             this.reset();
+        }
+        if (e.code === "Comma") {
+            this.decRound();
+        }
+        if (e.code === "Period") {
+            this.incRound();
         }
     }
 
@@ -130,15 +137,24 @@ class Tenable extends React.Component {
         }
     }
 
+    incRound() {
+        this.setRound(this.state.roundId +1);
+    }
+
+    decRound() {
+        this.setRound(this.state.roundId -1);
+    }
+
     setRound(roundId) {
-        if (rounds.length > roundId) {
+        if (rounds.length > roundId && roundId >=0) {
             this.setState({ 
                 answers: rounds[roundId].answers,
                 prompt: rounds[roundId].prompt,
                 answered: [],
                 highlight: null,
                 fail: false,
-                complete: false
+                complete: false,
+                roundId: roundId
             });
         } else {
             console.log("That round id doesnt exist");
