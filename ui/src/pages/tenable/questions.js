@@ -44,6 +44,51 @@ const rounds = [
         ],
         prompt: "The 10 Ingredients in Mary Berry's Christmas Pudding Recipe",
     },
+    {
+        answers: [
+            {answer: "Japan (3,000)", fontSize: "1.5vw"},
+            {answer: "Canada (2,100)", fontSize: "1.5vw"},
+            {answer: "USA (1,500)", fontSize: "1.5vw"},
+            {answer: "Russia (1,000)", fontSize: "1.5vw"},
+            {answer: "Norway (900)", fontSize: "1.5vw"},
+            {answer: "North Korea (700)", fontSize: "1.5vw"},
+            {answer: "China (600)", fontSize: "1.5vw"},
+            {answer: "Nepal (500)", fontSize: "1.5vw"},
+            {answer: "Denmark/Greenland (500)", fontSize: "1.5vw"},
+            {answer: "South Korea (400)", fontSize: "1.5vw"},
+        ],
+        prompt: "Top 10 Countries by Snowfall since the turn of the 21st Century (as of 2021)",
+    },
+    {
+        answers: [
+            {answer: "Snow Scene", fontSize: "1.5vw"},
+            {answer: "Robin", fontSize: "1.5vw"},
+            {answer: "Reindeer", fontSize: "1.5vw"},
+            {answer: "Snowman", fontSize: "1.5vw"},
+            {answer: "Father Christmas", fontSize: "1.5vw"},
+            {answer: "Snowflakes", fontSize: "1.5vw"},
+            {answer: "Nativity", fontSize: "1.5vw"},
+            {answer: "Holly", fontSize: "1.5vw"},
+            {answer: "Decorations", fontSize: "1.5vw"},
+            {answer: "Angels", fontSize: "1.5vw"},
+        ],
+        prompt: "Top 10 Christmas Card Images (2018)",
+    },
+    {
+        answers: [
+            {answer: "There's", fontSize: "1.5vw"},
+            {answer: "Afraid", fontSize: "1.5vw"},
+            {answer: "Banish", fontSize: "1.5vw"},
+            {answer: "Plenty", fontSize: "1.5vw"},
+            {answer: "Spread", fontSize: "1.5vw"},
+            {answer: "Around", fontSize: "1.5vw"},
+            {answer: "Prayer", fontSize: "1.5vw"},
+            {answer: "Having", fontSize: "1.5vw"},
+            {answer: "Outside", fontSize: "1.5vw"},
+            {answer: "Window", fontSize: "1.5vw"},
+        ],
+        prompt: "First 10 words of 6 letters or more from the song 'Do They Know It's Christmas'",
+    },
 ]
 
 export default rounds;
