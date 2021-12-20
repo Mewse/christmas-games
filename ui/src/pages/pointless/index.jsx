@@ -11,17 +11,17 @@ class Pointless extends(React.Component) {
     state = {
         teams: [
             {
-                name: "Vija, Adam & Liz",
+                name: "Mike",
                 score: 0,
                 roundScore: 0
             },
             {
-                name: "Jill, Mike & Nick",
+                name: "Emma",
                 score: 0,
                 roundScore: 0
             },
             {
-                name: "Mary, Sam & Katie",
+                name: "Dave",
                 score: 0,
                 roundScore: 0
             }
@@ -32,12 +32,13 @@ class Pointless extends(React.Component) {
             target: null,
             failed: false
         },
+        countdownTarget: null,
         showTower: false,
-        selectedRound: null,
-        answers: rounds[1].answers,
+        selectedRound: 0,
+        answers: rounds[0].answers,
         answered: [],
-        prompt: rounds[1].prompt,
-        type: rounds[1].type,
+        prompt: rounds[0].prompt,
+        type: rounds[0].type,
         selectedAnswer: null,
     }
     incorrectAudio = new Audio("/sfx/pointless-incorrect.mp3");
@@ -52,6 +53,10 @@ class Pointless extends(React.Component) {
         this.pointlessAnswer.volume = 0.1;
 
         this.listener = document.addEventListener("keypress", (e) => {
+            // Board controls
+            if (e.code === "KeyY") {
+                this.reveal();
+            }
             if (e.code === "KeyR") {
                 this.reset();
             }
@@ -61,12 +66,33 @@ class Pointless extends(React.Component) {
             if (e.code === "KeyT") {
                 this.toggleTower();
             }
+
+            // Round Selection
+            if (e.code === "Comma") {
+                this.setRound(this.state.selectedRound-1);
+            }
+            if (e.code === "Period") {
+                this.setRound(this.state.selectedRound+1);
+            }
+
+            // Team selection
+            if (e.code === "KeyQ") {
+                this.selectTeam(0)
+            }
+            if (e.code === "KeyW") {
+                this.selectTeam(1)
+            }
+            if (e.code === "KeyE") {
+                this.selectTeam(2)
+            }
+
+            // Answer selection
             if (e.keyCode >= 48 && e.keyCode <= 57) {
                 let index = Number(e.key) - 1;
                 if (index === -1) {
                     index = 9
                 }
-                this.setRound(index);
+                this.selectAnswer(index);
             }
         })
     }
@@ -83,7 +109,7 @@ class Pointless extends(React.Component) {
                     <h1>Teams</h1>
                     <div className="teams-container">
                         {this.state.teams.map((team, id) => (
-                            <div key={id} className="team-container">
+                            <div key={id} className={`team-container ${id === this.state.selectedTeam ? "selected": ""}`}>
                                 <h2>{team.name}</h2>
                                 <h3>Score: {team.score}</h3>
                                 <div className="score-container">
@@ -112,6 +138,7 @@ class Pointless extends(React.Component) {
                             answers={this.state.answers} 
                             answered={this.state.answered} 
                             prompt={this.state.prompt}
+                            selectedAnswer={this.state.selectedAnswer}
                         />
                     </div>
                 )}
@@ -166,6 +193,8 @@ class Pointless extends(React.Component) {
     }
 
     fail() {
+        let teams = [...this.state.teams];
+        teams[this.state.selectedTeam].score += 100;
         this.setState({
             tower: {
                 override: "X",
@@ -173,8 +202,9 @@ class Pointless extends(React.Component) {
                 height: this.state.tower.height,
                 target: null,
                 failed: true
-            }
-        })
+            },
+            teams: teams
+        });
         this.incorrectAudio.play();
     }
 
@@ -203,8 +233,13 @@ class Pointless extends(React.Component) {
             tower: {
                 level: TOWER_HEIGHT,
                 target: null,
-                height: this.state.tower.height
-            }
+                height: this.state.tower.height,
+                failed: false
+            },
+            selectedTeam: null,
+            selectedAnswer: null,
+            showTower: false,
+            countdownTarget: null
         });
     }
 
@@ -219,7 +254,7 @@ class Pointless extends(React.Component) {
         });
     }
 
-    addTeam = (name) => {
+    addTeam(name) {
         this.setState({
             teams: this.state.teams.append({name: name, score: 0, roundScore: 0})
         })
@@ -262,14 +297,58 @@ class Pointless extends(React.Component) {
     }
  
     setRound(roundId) {
-        if (roundId < rounds.length) {
+        if (roundId < rounds.length && roundId >= 0) {
+            let teams = [...this.state.teams];
+            if (this.state.selectedTeam !== null && this.state.selectedTeam >= 0 && this.state.selectedTeam < this.state.teams.length) {
+                teams[this.state.selectedTeam].roundScore += 1;
+            }
             this.setState({
                 answers: rounds[roundId].answers,
                 prompt: rounds[roundId].prompt,
                 type: rounds[roundId].type,
+                selectedRound: roundId,
                 answered: [],
+                teams: teams
             });
         }
+    }
+
+    selectTeam(teamId) {
+        if (teamId === this.state.selectedTeam) {
+            this.setState({
+                selectedTeam: null
+            });
+        } else {
+            this.setState({
+                selectedTeam: teamId
+            });
+        }
+    }
+
+    selectAnswer(answerId) {
+        this.setState({
+            selectedAnswer: answerId
+        });
+    }
+
+    async reveal() {
+        if (this.state.selectedTeam && this.state.selectedAnswer) {
+            await this.countDown(this.state.answers[this.state.selectedAnswer].count);
+            let teams = [...this.state.teams];
+            teams[this.state.selectedTeam].score += this.state.answers[this.state.selectedAnswer].count;
+            this.setState({
+                answered: this.state.answered.concat(this.state.selectedAnswer),
+                teams: teams,
+                selectedAnswer: null,
+                selectedTeam: null,
+            });
+        } else {
+            console.log("Missing team or answer selection");
+        }
+    }
+
+    applyScore() {
+
     }
 }
 

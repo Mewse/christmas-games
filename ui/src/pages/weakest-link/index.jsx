@@ -26,6 +26,9 @@ class WeakestLink extends (React.Component){
     componentDidMount() {
         window.game = this;
         this.handleKeypress = this.handleKeypress.bind(this);
+        this.roundMusicAudio.volume = 0.1;
+        this.roundStartAudio.volume = 0.1;
+        this.introAudio.volume = 0.1;
         this.listener = document.addEventListener("keypress", this.handleKeypress)
     }
 
@@ -121,7 +124,10 @@ class WeakestLink extends (React.Component){
         if (curr > 0) {
             this.setState({selectedOption: this.state.scoreOptions[curr-1]})
         } else {
-            this.completeRound();
+            this.setState({
+                selectedOption: this.state.scoreOptions[this.state.scoreOptions.length-1],
+                total: this.state.total + 1000, 
+            })
         }
     }
 
@@ -137,7 +143,11 @@ class WeakestLink extends (React.Component){
         if (curr !== this.state.scoreOptions.length-1) {
             const prev = this.state.scoreOptions[curr+1];
             if (this.state.total + prev >= 1000) {
-                this.completeRound();
+                // this.completeRound();
+                this.setState({
+                    total: this.state.total + prev, 
+                    selectedOption: this.state.scoreOptions[0]
+                })
             } else {
                 this.setState({total: this.state.total + prev, selectedOption: this.state.scoreOptions[this.state.scoreOptions.length-1]});
             }

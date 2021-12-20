@@ -7,7 +7,7 @@ import rounds from "./questions";
 class Tenable extends React.Component {
     state = {
         answers: rounds[0].answers,
-        answered: ["Partridge in a pear tree"],
+        answered: [],
         prompt: rounds[0].prompt,
         fail: false,
         highlight: null,

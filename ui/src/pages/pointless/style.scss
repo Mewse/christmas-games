@@ -23,6 +23,9 @@
         .team-container {
             margin: 40px 0;
             
+            &.selected {
+                border: 1px solid white;
+            }
 
             .score-container {
                 display: flex;
