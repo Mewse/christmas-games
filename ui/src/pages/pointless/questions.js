@@ -238,6 +238,73 @@ const rounds = [
         type: TYPES.PICTURE,
         prompt: "Famous Holly's"
     },
+    {
+        answers: [
+            {
+                src: "/images/annie-lennox.jpg",
+                answer: "Annie Lennox",
+                count: 10,
+            },
+            {
+                src: "/images/justin-trudeau.jpg",
+                answer: "Justin Trudeau",
+                count: 32,
+            },
+            {
+                src: "/images/chris-kamara.jpg",
+                answer: "Chris Kamara",
+                count: 24,
+            },
+            {
+                src: "/images/shane-macgowan.jpg",
+                answer: "Shane Macgowan",
+                count: 13,
+            },
+            {
+                src: "/images/dido.jpg",
+                answer: "Dido",
+                count: 18,
+            }
+        ],
+        type: TYPES.PICTURE,
+        prompt: "Born on christmas day"
+    },
+    {
+        answers: [
+            {
+                prompt: "The health, happiness, and fortunes of a person or group",
+                answer: "Welfare",
+                count: 26,
+            },
+            {
+                prompt: "Largest Town in Shropshire",
+                answer: "Telford",
+                count: 14,
+            },
+            {
+                prompt: "Underwater Creatures with a laterally compressed body, typically brightly coloured or boldly striped",
+                answer: "Angelfish",
+                count: 5,
+            },
+            {
+                prompt: "A long, flat length of board hung to a wall, used to hold objects",
+                answer: "Shelf",
+                count: 83,
+            },
+            {
+                prompt: "A large amount",
+                answer: "Barrelful",
+                count: 0,
+            },
+            {
+                prompt: "Concerned excessively with oneself",
+                answer: "Selfish",
+                count: 57,
+            }
+        ],
+        type: TYPES.OPEN,
+        prompt: "Elf Words"
+    },
 ]
 
 export {

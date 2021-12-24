@@ -66,6 +66,14 @@ class Pointless extends(React.Component) {
             if (e.code === "KeyT") {
                 this.toggleTower();
             }
+            if (e.code === "Space") {
+                this.toggleAnswer();
+            }
+
+            // Reset scores
+            if (e.code === "KeyZ") {
+                this.resetScores();
+            }
 
             // Round Selection
             if (e.code === "Comma") {
@@ -99,6 +107,7 @@ class Pointless extends(React.Component) {
 
     componentWillUnmount() {
         document.removeEventListener("keypress", this.listener);
+        window.game = null;
     }
 
     render() {
@@ -260,6 +269,20 @@ class Pointless extends(React.Component) {
         })
     }
 
+    toggleAnswer() {
+        if (!this.state.answered.includes(this.state.selectedAnswer)) {
+            this.setAnswered(this.state.selectedAnswer);
+        } else {
+            this.setUnanswered(this.state.selectedAnswer);
+        }
+    }
+
+    setUnanswered(answerId) {
+        this.setState({
+            answered: this.state.answered.filter(answer => answer !== answerId)
+        });
+    }
+
     setAnswered(answerId) {
         this.setState({
             answered: this.state.answered.concat(answerId)
@@ -295,6 +318,16 @@ class Pointless extends(React.Component) {
             });
         }
     }
+
+    resetScores() {
+        let teams = [...this.state.teams];
+        teams.forEach(team => {
+            team.score = 0
+        })
+        this.setState({
+            teams: teams
+        });
+    }
  
     setRound(roundId) {
         if (roundId < rounds.length && roundId >= 0) {
@@ -326,13 +359,19 @@ class Pointless extends(React.Component) {
     }
 
     selectAnswer(answerId) {
-        this.setState({
-            selectedAnswer: answerId
-        });
+        if (answerId === this.state.selectedAnswer) {
+            this.setState({
+                selectedAnswer: null
+            });
+        } else {
+            this.setState({
+                selectedAnswer: answerId
+            });
+        }
     }
 
     async reveal() {
-        if (this.state.selectedTeam && this.state.selectedAnswer) {
+        if (this.state.selectedTeam !== null && this.state.selectedAnswer !== null) {
             await this.countDown(this.state.answers[this.state.selectedAnswer].count);
             let teams = [...this.state.teams];
             teams[this.state.selectedTeam].score += this.state.answers[this.state.selectedAnswer].count;

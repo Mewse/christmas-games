@@ -34,6 +34,7 @@ class WeakestLink extends (React.Component){
 
     componentWillUnmount() {
         document.removeEventListener("keypress", this.listener);
+        window.game = null;
     }
 
     handleKeypress(e) {
@@ -142,15 +143,15 @@ class WeakestLink extends (React.Component){
         const curr = this.state.scoreOptions.indexOf(this.state.selectedOption);
         if (curr !== this.state.scoreOptions.length-1) {
             const prev = this.state.scoreOptions[curr+1];
-            if (this.state.total + prev >= 1000) {
-                // this.completeRound();
-                this.setState({
-                    total: this.state.total + prev, 
-                    selectedOption: this.state.scoreOptions[0]
-                })
-            } else {
-                this.setState({total: this.state.total + prev, selectedOption: this.state.scoreOptions[this.state.scoreOptions.length-1]});
-            }
+            // if (this.state.total + prev >= 1000) {
+            //     // this.completeRound();
+            //     this.setState({
+            //         total: this.state.total + prev, 
+            //         selectedOption: this.state.scoreOptions[0]
+            //     })
+            // } else {
+            this.setState({total: this.state.total + prev, selectedOption: this.state.scoreOptions[this.state.scoreOptions.length-1]});
+            // }
         } 
         
     }

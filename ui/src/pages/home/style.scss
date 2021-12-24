@@ -1,0 +1,23 @@
+.home {
+    background-color: rgb(218, 110, 131);
+    height: 100vh;
+    
+    .game-bar {
+        width: 100vw;
+        text-align: center;
+        bottom: 0;
+        margin-bottom: 20px;
+        position: fixed;
+        
+        a {
+            margin: 20px;
+            background-color: white;
+            border: 2px inset white;
+            border-radius: 50%;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: rgba(0,0,0,0);
+            color: white;
+        }
+    }
+}

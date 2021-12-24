@@ -38,6 +38,7 @@ class Tenable extends React.Component {
 
     componentWillUnmount() {
         document.removeEventListener("keypress", this.handleKeypress);
+        window.game = null;
     }
 
     handleKeypress(e) {
