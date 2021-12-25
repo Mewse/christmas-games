@@ -27,7 +27,7 @@ const Home = (props) => {
     return (
         <div className="home fullscreen-background">
             {_.range(100).map(i => <div class="snow"></div>)}
-            <h1 className="site-title glow">Present Pursuit</h1>
+            <h1 className="site-title glow">The Christmas Channel</h1>
             <ScoreTable players={players} data={data} />
             <div className="game-bar">
                 <Link to="/tenable">1</Link>
