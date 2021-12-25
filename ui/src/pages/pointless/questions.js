@@ -2,7 +2,8 @@ const TYPES = {
     PICTURE: 0,
     OPTIONS: 1,
     INLINE: 2,
-    OPEN: 3
+    OPEN: 3,
+    CATEGORIES: 4,
 }
 
 const rounds = [
@@ -304,6 +305,15 @@ const rounds = [
         ],
         type: TYPES.OPEN,
         prompt: "Elf Words"
+    },
+    {
+        answers: [
+            "Eighties",
+            "Nineties",
+            "Noughties"
+        ],
+        type: TYPES.CATEGORIES,
+        prompt: "Best selling christmas toys by decade"
     },
 ]
 

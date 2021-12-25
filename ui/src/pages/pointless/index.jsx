@@ -11,17 +11,17 @@ class Pointless extends(React.Component) {
     state = {
         teams: [
             {
-                name: "Mike",
+                name: "Team 1",
                 score: 0,
                 roundScore: 0
             },
             {
-                name: "Emma",
+                name: "Team 2",
                 score: 0,
                 roundScore: 0
             },
             {
-                name: "Dave",
+                name: "Team 3",
                 score: 0,
                 roundScore: 0
             }
@@ -40,6 +40,7 @@ class Pointless extends(React.Component) {
         prompt: rounds[0].prompt,
         type: rounds[0].type,
         selectedAnswer: null,
+        selectedTeam: null,
     }
     incorrectAudio = new Audio("/sfx/pointless-incorrect.mp3");
     targetReachedAudio = new Audio("/sfx/pointless-target-reached.mp3");
@@ -203,7 +204,9 @@ class Pointless extends(React.Component) {
 
     fail() {
         let teams = [...this.state.teams];
-        teams[this.state.selectedTeam].score += 100;
+        if (this.state.selectedTeam) {
+            teams[this.state.selectedTeam].score += 100;
+        }
         this.setState({
             tower: {
                 override: "X",

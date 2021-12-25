@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'MerryChristmasFlake';
+    src: local('MerryChristmasFlake'), url("MerryChristmasFlake.ttf") format('truetype');
+  }
+
 .home {
     background-color: rgb(218, 110, 131);
     height: 100vh;
@@ -21,3 +26,113 @@
         }
     }
 }
+
+.site-title {
+    font-family: "MerryChristmasFlake";
+    position: relative;
+    top: 50%;
+    margin-top: -7.5rem;
+    font-size: min(18vw, 18vh);
+    font-weight: 100;
+  }
+
+.fullscreen-background {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    height:100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.enter-button {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    margin-left: -100px;
+    width: 200px;
+    font-size: 4em;
+    line-height: 1em;
+    height: 75px;
+    background:none;
+    font-family: 'Amatic SC', sans-serif;
+    text-align: center;
+    color: white;
+    text-shadow: white 0px 0px 30px;
+    animation: glow 2s infinite ease-in-out;
+    cursor: pointer;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: white 0px 0px 30px;
+    transform: scale(1);
+  }
+  50% { 
+    text-shadow: white 0px 0px 10px;
+    transform: scale(1.1);
+  }
+  100% { 
+    text-shadow: white 0px 0px 30px;
+    transform: scale(1);
+  };
+}
+
+
+.fullscreen-background {
+    height: 100vh;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    overflow: hidden;
+    filter: drop-shadow(0 0 10px white);
+  }
+  
+  @function random_range($min, $max) {
+    $rand: random();
+    $random_range: $min + floor($rand * (($max - $min) + 1));
+    @return $random_range;
+  }
+
+.snow {
+  $total: 200;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+
+  @for $i from 1 through $total {
+    $random-x: random(1000000) * 0.0001vw;
+    $random-offset: random_range(-100000, 100000) * 0.0001vw;
+    $random-x-end: $random-x + $random-offset;
+    $random-x-end-yoyo: $random-x + ($random-offset / 2);
+    $random-yoyo-time: random_range(30000, 80000) / 100000;
+    $random-yoyo-y: $random-yoyo-time * 100vh;
+    $random-scale: random(10000) * 0.0001;
+    $fall-duration: random_range(10, 30) * 1s;
+    $fall-delay: random(30) * -1s;
+
+    &:nth-child(#{$i}) {
+      opacity: random(10000) * 0.0001;
+      transform: translate($random-x, -10px) scale($random-scale);
+      animation: fall-#{$i} $fall-duration $fall-delay linear infinite;
+    }
+
+    @keyframes fall-#{$i} {
+      #{percentage($random-yoyo-time)} {
+        transform: translate($random-x-end, $random-yoyo-y) scale($random-scale);
+      }
+      
+      to {
+        transform: translate($random-x-end-yoyo, 100vh) scale($random-scale);
+      }
+    }
+  }
+}
+
+.glow {
+  color: #fff;
+  text-align: center;
+}
+  

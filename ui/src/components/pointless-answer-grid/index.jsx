@@ -1,6 +1,7 @@
 import { TYPES } from "../../pages/pointless/questions";
 import "./style.scss";
 import PointlessPicture from "../pointless-picture";
+import PointlessCategoryGrid from "../pointless-category-grid";
 
 const PointlessAnswerGrid = (props) => {
     let {answers, answered, prompt, type, selectedAnswer} = props;
@@ -19,7 +20,7 @@ const PointlessAnswerGrid = (props) => {
                         <PointlessPicture {...answers[4]} answered={answered.includes(4)} selected={selectedAnswer === 4}/>
                      </div>
                  </div>
-             ) : (
+             ) : type === TYPES.OPEN ? (
                 <div className="answer-container">
                     <div className="title-prompt">
                         {prompt}
@@ -31,6 +32,13 @@ const PointlessAnswerGrid = (props) => {
                             <div className="answer-answer">{answered.includes(id) ? answer.answer : ""}</div>
                         </div>  
                     ))}
+                </div>
+             ) : (
+                <div className="answer-container">
+                    <div className="title-prompt">
+                        {prompt}
+                    </div>
+                    <PointlessCategoryGrid categories={answers} />
                 </div>
              )}
          </div>

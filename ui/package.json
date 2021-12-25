@@ -16,6 +16,7 @@
     "react-scripts": "4.0.3",
     "sass": "^1.45.0",
     "tabletop": "^1.6.3",
+    "underscore": "^1.13.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

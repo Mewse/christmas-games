@@ -2,10 +2,18 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./style.scss";
 import Tabletop from "tabletop";
+import _ from "underscore";
+import ScoreTable from "../../components/score-table";
 
 const Home = (props) => {
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([
+        ["Tenable", 1, 5, 6, 19, 15, 20]
+    ]);
+
+    const [players, setPlayers] = useState([
+        "adam", "liz", "mary", "vija", "nick"
+    ]);
 
     useEffect(() => {
         Tabletop.init({
@@ -17,7 +25,10 @@ const Home = (props) => {
     }, [])
     
     return (
-        <div className="home">
+        <div className="home fullscreen-background">
+            {_.range(100).map(i => <div class="snow"></div>)}
+            <h1 className="site-title glow">Present Pursuit</h1>
+            <ScoreTable players={players} data={data} />
             <div className="game-bar">
                 <Link to="/tenable">1</Link>
                 <Link to="/weakest-link">2</Link>
