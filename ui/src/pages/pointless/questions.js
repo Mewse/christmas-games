@@ -41,7 +41,7 @@ const rounds = [
             },
             {
                 answer: "Earring",
-                prompt: "Giel with a Pearl E _ _ _ _ _ _ (Tracy Chevalier, 1999)",
+                prompt: "Girl with a Pearl E _ _ _ _ _ _ (Tracy Chevalier, 1999)",
                 count: 84,
             },
         ],
@@ -124,7 +124,7 @@ const rounds = [
             {
                 answer: "Panini",
                 prompt: "A sandwich made with italian bread, usually grilled or toasted (6)",
-                count: 8,
+                count: 50,
             },
         ],
         type: TYPES.OPEN,
@@ -277,78 +277,82 @@ const rounds = [
     {
         answers: [
             {
-                src: "/images/annie-lennox.jpg",
-                answer: "Annie Lennox",
-                count: 10,
+                src: "/images/dwayne-johnson.png",
+                answer: "Dwayne Johnson",
+                count: 86,
             },
             {
-                src: "/images/justin-trudeau.jpg",
-                answer: "Justin Trudeau",
+                src: "/images/donatella-versace.png",
+                answer: "Donatella Versace",
                 count: 32,
             },
             {
-                src: "/images/chris-kamara.jpg",
-                answer: "Chris Kamara",
-                count: 24,
+                src: "/images/lily-allen.png",
+                answer: "Lily Allen",
+                count: 48,
             },
             {
-                src: "/images/shane-macgowan.jpg",
-                answer: "Shane Macgowan",
-                count: 13,
+                src: "/images/ellie-kemper.png",
+                answer: "Ellie Kemper",
+                count: 35,
             },
             {
-                src: "/images/dido.jpg",
-                answer: "Dido",
-                count: 18,
+                src: "/images/shaun-t.png",
+                answer: "Shaun T",
+                count: 3,
             }
         ],
         type: TYPES.PICTURE,
-        prompt: "Born on christmas day"
+        prompt: "Born on May 2nd"
     },
     {
         answers: [
             {
-                prompt: "The health, happiness, and fortunes of a person or group",
-                answer: "Welfare",
-                count: 26,
-            },
-            {
-                prompt: "Largest Town in Shropshire",
-                answer: "Telford",
+                prompt: "Destiny / Fate (6)",
+                answer: "Kismet",
                 count: 14,
             },
             {
-                prompt: "Underwater Creatures with a laterally compressed body, typically brightly coloured or boldly striped",
-                answer: "Angelfish",
-                count: 5,
+                prompt: "an act or judgement that is misguided or wrong (7)",
+                answer: "Mistake",
+                count: 67,
             },
             {
-                prompt: "A long, flat length of board hung to a wall, used to hold objects",
-                answer: "Shelf",
+                prompt: "Point or direct at a target (3)",
+                answer: "Aim",
                 count: 83,
             },
             {
-                prompt: "A large amount",
-                answer: "Barrelful",
-                count: 0,
+                prompt: "An Indian term for minced meat (5)",
+                answer: "Keema",
+                count: 10,
             },
             {
-                prompt: "Concerned excessively with oneself",
-                answer: "Selfish",
-                count: 57,
+                prompt: "A jet-propelled vehicle that skims across the surface of water (6)",
+                answer: "Jetski",
+                count: 31,
+            },
+            {
+                prompt: "To move or glide quickly along a surface (5)",
+                answer: "Skate",
+                count: 71,
+            },
+            {
+                prompt: "A young guineafowl (4)",
+                answer: "Keet",
+                count: 0,
             }
         ],
         type: TYPES.OPEN,
-        prompt: "Elf Words"
+        prompt: "Katie James"
     },
     {
         answers: [
-            "Eighties",
-            "Nineties",
-            "Noughties"
+            "Most performed Broadway Musicals",
+            "'Best Musical' Award Winners"
         ],
         type: TYPES.CATEGORIES,
-        prompt: "Best selling christmas toys by decade"
+        prompt: "Musically Inclined"
     },
 ]
 
