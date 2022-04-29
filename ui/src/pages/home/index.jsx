@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
 import "./style.scss";
 // import Tabletop from "tabletop";
 import _ from "underscore";
@@ -15,6 +17,8 @@ const Home = (props) => {
         "adam", "liz", "mary", "vija", "nick"
     ]);
 
+    const { width, height } = useWindowSize()
+
     // useEffect(() => {
     //     Tabletop.init({
     //         key: "https://docs.google.com/spreadsheets/d/19g_Ku-CjmuQvPBzKDyLN3AFPpB8ucCxfGXUWxKwlOwY/edit#gid=0",
@@ -26,8 +30,34 @@ const Home = (props) => {
     
     return (
         <div className="home fullscreen-background">
-            {_.range(100).map(i => <div class="snow"></div>)}
-            <h1 className="site-title glow">The Christmas Channel</h1>
+            <Confetti
+                width={width}
+                height={height}
+            />
+            <h1 className="site-title glow">
+                <span>H</span>
+                <span>a</span>
+                <span>p</span>
+                <span>p</span>
+                <span>y</span>
+                <span>&nbsp;</span>
+                <span>B</span>
+                <span>i</span>
+                <span>r</span>
+                <span>t</span>
+                <span>h</span>
+                <span>d</span>
+                <span>a</span>
+                <span>y</span>
+            </h1>
+            <h1 className="site-title glow">
+                <span>K</span>
+                <span>a</span>
+                <span>t</span>
+                <span>i</span>
+                <span>e</span>
+                <span>!</span>
+            </h1>
             {/* <ScoreTable players={players} data={data} /> */}
             <div className="game-bar">
                 <Link to="/tenable">1</Link>

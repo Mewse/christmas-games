@@ -3,6 +3,11 @@
     src: local('MerryChristmasFlake'), url("MerryChristmasFlake.ttf") format('truetype');
   }
 
+  @font-face {
+    font-family: 'Baloen';
+    src: local('Baloen'), url("BaloenFont.ttf") format('truetype');
+  }
+
 .home {
     background-color: rgb(218, 110, 131);
     height: 100vh;
@@ -28,11 +33,11 @@
 }
 
 .site-title {
-    font-family: "MerryChristmasFlake";
+    font-family: "Baloen";
     position: relative;
     top: 50%;
-    margin-top: -7.5rem;
-    font-size: min(18vw, 18vh);
+    margin-top: -8.5rem;
+    font-size: min(12vw, 12vh);
     font-weight: 100;
   }
 
@@ -83,7 +88,7 @@
 
 .fullscreen-background {
     height: 100vh;
-    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    background: radial-gradient(circle, rgba(140,249,255,1) 93%, rgba(252,252,252,1) 100%);
     overflow: hidden;
     filter: drop-shadow(0 0 10px white);
   }
@@ -99,8 +104,8 @@
   position: absolute;
   width: 10px;
   height: 10px;
-  background: white;
-  border-radius: 50%;
+  background: orange;
+  
 
   @for $i from 1 through $total {
     $random-x: random(1000000) * 0.0001vw;
@@ -132,7 +137,31 @@
 }
 
 .glow {
-  color: #fff;
+  color: #2ca826;
   text-align: center;
+
+  span:nth-of-type(5n-5) {
+    color: blue;
+  }
+
+  span:nth-of-type(5n-4) {
+    color: red;
+  }
+
+  span:nth-of-type(5n-3) {
+    color: orange;
+  }
+
+  span:nth-of-type(5n-2) {
+    color: purple;
+  }
+
+  span:nth-of-type(5n-1) {
+    color: yellow;
+  }
+
+  span:nth-of-type(5n+0) {
+    color: green;
+  }
 }
   
