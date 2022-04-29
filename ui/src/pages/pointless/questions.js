@@ -179,7 +179,7 @@ const rounds = [
                 count: 3,
             },
             {
-                answer: "The Dukes of Hazard",
+                answer: "....Dukes of Hazard",
                 prompt: "General Lee",
                 count: 45,
             },
@@ -230,7 +230,7 @@ const rounds = [
                 count: 63,
             },
             {
-                answer: "Captain Scarlet and the Mysterons",
+                answer: "Captain Scarlet",
                 prompt: "Cloudbase",
                 count: 8,
             },
@@ -246,27 +246,27 @@ const rounds = [
     {
         answers: [
             {
-                src: "/images/puppy-pomeranian.jpg",
+                src: "/images/puppy-pomeranian.png",
                 answer: "Pomeranian",
                 count: 34,
             },
             {
-                src: "/images/puppy-samoyed.jpg",
+                src: "/images/puppy-samoyed.png",
                 answer: "Samoyed (Sammie)",
                 count: 9,
             },
             {
-                src: "/images/puppy-shiba-inu.jpg",
+                src: "/images/puppy-shiba-inu.png",
                 answer: "Shiba Inu",
                 count: 21,
             },
             {
-                src: "/images/puppy-leonberger.jpg",
+                src: "/images/puppy-leonberger.png",
                 answer: "Leonberger",
                 count: 0,
             },
             {
-                src: "/images/puppy-border-collie.jpg",
+                src: "/images/puppy-border-collie.png",
                 answer: "Border Collie",
                 count: 75,
             }
