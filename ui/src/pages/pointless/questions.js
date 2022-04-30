@@ -7,47 +7,7 @@ const TYPES = {
 }
 
 const rounds = [
-    {
-        answers: [
-            {
-                answer: "Esio",
-                prompt: "E _ _ _ Trot (Roald Dahl,1990)",
-                count: 16,
-            },
-            {
-                answer: "English",
-                prompt: "The E _ _ _ _ _ Patient (Michael Ondaatje, 1992)",
-                count: 64,
-            },
-            {
-                answer: "Eternity",
-                prompt: "Artemis Fowl: The E _ _ _ _ _ _ _ Code (Eoin Colfer, 2003)",
-                count: 0,
-            },
-            {
-                answer: "Ecstasy",
-                prompt: "The Agony and the E _ _ _ _ _ _ (Irving Stone, 1961)",
-                count: 33,
-            },
-            {
-                answer: "Eighty",
-                prompt: "Around the World in E _ _ _ _ _ Days (Jules Verne, 1873)",
-                count: 87,
-            },
-            {
-                answer: "Elephants",
-                prompt: "Water for E _ _ _ _ _ _ _ _ (Sara Gruen, 2006)",
-                count: 12,
-            },
-            {
-                answer: "Earring",
-                prompt: "Girl with a Pearl E _ _ _ _ _ _ (Tracy Chevalier, 1999)",
-                count: 84,
-            },
-        ],
-        type: TYPES.OPEN,
-        prompt: "E-Books"
-    },
+    
     {
         answers: [
             {
@@ -67,7 +27,7 @@ const rounds = [
             },
             {
                 answer: "Potholing",
-                prompt: "The exploration of underground cases as a leisure activity (9)",
+                prompt: "The exploration of underground caves as a leisure activity (9)",
                 count: 43,
             },
             {
@@ -129,6 +89,47 @@ const rounds = [
         ],
         type: TYPES.OPEN,
         prompt: "POTs and PANs"
+    },
+    {
+        answers: [
+            {
+                answer: "Esio",
+                prompt: "E _ _ _ Trot (Roald Dahl,1990)",
+                count: 16,
+            },
+            {
+                answer: "English",
+                prompt: "The E _ _ _ _ _ Patient (Michael Ondaatje, 1992)",
+                count: 64,
+            },
+            {
+                answer: "Eternity",
+                prompt: "Artemis Fowl: The E _ _ _ _ _ _ _ Code (Eoin Colfer, 2003)",
+                count: 0,
+            },
+            {
+                answer: "Ecstasy",
+                prompt: "The Agony and the E _ _ _ _ _ _ (Irving Stone, 1961)",
+                count: 33,
+            },
+            {
+                answer: "Eighty",
+                prompt: "Around the World in E _ _ _ _ _ Days (Jules Verne, 1873)",
+                count: 87,
+            },
+            {
+                answer: "Elephants",
+                prompt: "Water for E _ _ _ _ _ _ _ _ (Sara Gruen, 2006)",
+                count: 12,
+            },
+            {
+                answer: "Earring",
+                prompt: "Girl with a Pearl E _ _ _ _ _ _ (Tracy Chevalier, 1999)",
+                count: 84,
+            },
+        ],
+        type: TYPES.OPEN,
+        prompt: "E-Books"
     },
     {
         answers: [
@@ -226,7 +227,7 @@ const rounds = [
             },
             {
                 answer: "Star Wars",
-                prompt: "Millenium Falcon",
+                prompt: "Millennium Falcon",
                 count: 63,
             },
             {
@@ -313,9 +314,9 @@ const rounds = [
                 count: 14,
             },
             {
-                prompt: "an act or judgement that is misguided or wrong (7)",
-                answer: "Mistake",
-                count: 67,
+                prompt: "unwanted material that have been thrown overboard from a ship and washed ashore (6)",
+                answer: "Jetsam",
+                count: 42,
             },
             {
                 prompt: "Point or direct at a target (3)",
@@ -330,12 +331,12 @@ const rounds = [
             {
                 prompt: "A jet-propelled vehicle that skims across the surface of water (6)",
                 answer: "Jetski",
-                count: 31,
+                count: 51,
             },
             {
                 prompt: "To move or glide quickly along a surface (5)",
                 answer: "Skate",
-                count: 71,
+                count: 61,
             },
             {
                 prompt: "A young guineafowl (4)",

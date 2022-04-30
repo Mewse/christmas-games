@@ -204,7 +204,7 @@ class Pointless extends(React.Component) {
 
     fail() {
         let teams = [...this.state.teams];
-        if (this.state.selectedTeam) {
+        if (this.state.selectedTeam !== null) {
             teams[this.state.selectedTeam].score += 100;
         }
         this.setState({
